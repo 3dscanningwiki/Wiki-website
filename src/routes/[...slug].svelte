@@ -1,7 +1,9 @@
 <script context="module">
-	export async function load({ fetch }) {
+	export async function load({ params, fetch }) {
+		const slug = params.slug;
 		try {
-      const content = await fetch(`/home.json`).then((r) => r.json());
+			const res = await fetch(`/${slug}.json`);
+			const content = await res.json().catch(err => console.log(err));
 			return {
 				props: { content }
 			};
@@ -26,4 +28,3 @@
   <h1>404 - Not Found!</h1>
 {/if}
 <Page html={content.html} frontmatter={content.frontmatter} />
-
