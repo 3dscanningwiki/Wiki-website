@@ -1,9 +1,9 @@
 <script context="module">
 	export async function load({ fetch }) {
 		try {
-      const content = await fetch(`/home.json`).then((r) => r.json());
+      const content = await fetch(`/home.md.json`).then((r) => r.json());
 			return {
-				props: { content }
+				props: { content, slug: "home.md" }
 			};
 		} catch (err) {
 			return {
@@ -17,13 +17,10 @@
 <script>
   import Page from "$lib/page.svelte";
   export let content;
-
-  $: notFound = content.status === 404;
+  export let slug;
 </script>
 
+<Page slug={slug} status={content.status} html={content.html} frontmatter={content.frontmatter} />
 
-{#if notFound}
-  <h1>404 - Not Found!</h1>
-{/if}
-<Page html={content.html} frontmatter={content.frontmatter} />
+
 
