@@ -1,9 +1,9 @@
 <script context="module">
 	export async function load({ fetch }) {
 		try {
-      const content = await fetch(`/home.md.json`).then((r) => r.json());
+      const content = await fetch(`/home.json`).then((r) => r.json());
 			return {
-				props: { content, slug: "home.md" }
+				props: { content, slug: "home" }
 			};
 		} catch (err) {
 			return {

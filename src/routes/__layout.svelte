@@ -8,13 +8,13 @@
 	<nav class="sidebar">
 		<a href="/">Home</a>
     <hr/>
-    <a href="/Photogrammetry.md">Photogrammetry</a>
-    <a href="/Lidar.md">Lidar / ToF</a>
-    <a href="/Photometric_Stereo.md">Photometric Stereo</a>
-    <a href="/Structured_Light.md">Structured Light</a>
+    <a href="/Photogrammetry">Photogrammetry</a>
+    <a href="/Lidar">Lidar / ToF</a>
+    <a href="/Photometric_Stereo">Photometric Stereo</a>
+    <a href="/Structured_Light">Structured Light</a>
     <hr/>
-    <a href="/meta/contributing_guide.md">Contribute</a>
-    <a href="https://github.com/3dscanningwiki/Wiki">GitHub</a>
+    <a href="/meta/contributing_guide">Contribute</a>
+    <a href="https://github.com/3dscanningwiki/3dscanningwiki.github.io">GitHub</a>
 	</nav>
 
 	<div class="container">

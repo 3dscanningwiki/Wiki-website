@@ -3,7 +3,8 @@ import { process } from '$lib/markdown';
 
 export async function get({ params }) {
 	const { slug, ext } = params;
-	if (ext.toLowerCase().endsWith('.json')) {
+	console.log(slug, ext)
+	if (ext.toLowerCase() === 'json') {
 		const body = await process(slug + '.md');
 		return {
 			body
