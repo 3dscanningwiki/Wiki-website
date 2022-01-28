@@ -1,6 +1,7 @@
 import MarkdownIt from 'markdown-it';
 import FrontMatter from 'markdown-it-front-matter';
 import ReplaceLink from 'markdown-it-replace-link';
+import InlineComment from 'markdown-it-inline-comments';
 import fs from 'fs-extra';
 import yaml from 'js-yaml';
 
@@ -13,11 +14,15 @@ export async function process(fileName) {
 		const md = new MarkdownIt({
 			replaceLink
 		});
+		
 		let metadata;
 		md.use(FrontMatter, (fm) => {
 			metadata = yaml.load(fm);
 		});
+		
 		md.use(ReplaceLink);
+		md.use(InlineComment);
+
 		const html = md.render(str);
 		if (!metadata || metadata.published !== false) {
 			return { html, slug: fileName.slice(0, -3), frontmatter: metadata, status: 200 };
