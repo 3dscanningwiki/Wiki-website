@@ -39,6 +39,17 @@ html, body {
   background-color: var(--sidebar);
   color: var(--sidebar-text);
 }
+
+.sidebar ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.sidebar p {
+  margin: 0px;
+}
+
 .sidebar a {
   color: inherit;
   font-weight: 500;
