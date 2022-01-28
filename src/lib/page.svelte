@@ -16,6 +16,7 @@
     <p>You can create this page <a target="_blank" href="https://github.com/3dscanningwiki/3dscanningwiki.github.io/new/main">here</a></p>
   {:else}
 		{@html html}
+    <hr />
     <em><a href={`https://github.com/3dscanningwiki/3dscanningwiki.github.io/blob/main/${slug}.md`} target="_blank">Edit this page</a></em>
 	{/if}
 </main>

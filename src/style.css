@@ -121,3 +121,22 @@ html, body {
   margin-right: auto;
   max-height: max(25vh, 150px);
 }
+
+.footnote-item p {
+  margin: 0px;
+  display: inline;
+}
+
+.footnotes-list {
+  counter-reset: list;
+  padding: 0rem 0rem;
+}
+
+.footnote-item {
+  list-style: none;
+}
+.footnote-item:before {
+  content: "[" counter(list) "]";
+  margin-right: 0.5rem;
+  counter-increment: list;
+}
