@@ -37,13 +37,10 @@ export async function process(fileName) {
 	return undefined;
 }
 
-
-const protocolRegex = /^.{1,8}:\/\//
-
 function replaceLink(link, env) {
 	link = link.trim()
 	if (!link.startsWith('http') && link.endsWith('.md')) {
-		return link.substr(0, link.length - 3) + ".html";
+		return link.substr(0, link.length - 3);
 	}
 	return link;
 }
