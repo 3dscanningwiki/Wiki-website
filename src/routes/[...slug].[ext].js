@@ -9,7 +9,7 @@ export async function get({ params }) {
 			body
 		};
 	} else if (['png', 'jpg', 'jpeg', 'gif'].includes(ext.toLowerCase())) {
-		const body = await fs.readFile('content/' + slug + '.' + ext);
+		const body = fs.createReadStream('content/' + slug + '.' + ext);
 		return {
 			body
 		};
