@@ -1,6 +1,11 @@
 <script context="module">
 	export async function load({ params, fetch }) {
-		const slug = params.slug;
+		let slug = params.slug;
+
+		if (slug.endsWith("/")) {
+			slug = slug.substr(0, slug.length-1);
+		}
+
 		const res = await fetch(`/${slug}.json`);
 		const content = await res.json().catch((err) => console.log(err));
 		
