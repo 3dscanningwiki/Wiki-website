@@ -10,7 +10,7 @@ html, body {
 
   --sidebar: #1976d2;
   --sidebar-hover: #2b81d5;
-  --sidebar-light: #3f56bd;
+  --sidebar-light: #94C9FF;
   --sidebar-text: #ffffff;
   --header: #000000;
   --header-light: #131313;
@@ -111,6 +111,13 @@ html, body {
 /** CONTENT **/
 .content {
   margin: 1rem;
+}
+
+.content .note {
+  display: inline-block;
+  padding: 1rem;
+  background-color: var(--sidebar-light);
+  border-radius: 0.25rem;
 }
 
 .content img {
