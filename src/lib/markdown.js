@@ -42,11 +42,8 @@ const protocolRegex = /^.{1,8}:\/\//
 
 function replaceLink(link, env) {
 	link = link.trim()
-	if (!link.match(protocolRegex) && ! link.startsWith("/")) {	
-		link = "../" + link;
-	}
 	if (!link.startsWith('http') && link.endsWith('.md')) {
-		return link.substr(0, link.length - 3) + "/";
+		return link.substr(0, link.length - 3) + ".html";
 	}
 	return link;
 }

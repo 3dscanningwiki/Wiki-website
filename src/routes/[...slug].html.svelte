@@ -1,7 +1,7 @@
 <script context="module">
 	export async function load({ params, fetch }) {
 		let slug = params.slug;
-
+		
 		if (slug.endsWith("/")) {
 			slug = slug.substr(0, slug.length-1);
 		}
