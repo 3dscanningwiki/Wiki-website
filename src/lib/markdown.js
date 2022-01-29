@@ -53,6 +53,7 @@ export async function processAll() {
 		return {
 			text: str,
 			...metadata,
+			slug: f.substring(0, f.length -3 ) + "/",
 		}
 	}));
 
