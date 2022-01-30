@@ -29,6 +29,6 @@
 		{/if}
 		{@html html}
 		<hr />
-		<em><a href={editLink} target="_blank">Edit this page</a></em>
+		<a class="edit-link" href={editLink} target="_blank">Edit this page</a>
 	{/if}
 </main>
