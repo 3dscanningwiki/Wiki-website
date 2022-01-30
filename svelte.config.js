@@ -16,7 +16,7 @@ const config = {
 		trailingSlash: "never",
 		browser: {
 			router: false,
-		}
+		},
 	}
 };
 
