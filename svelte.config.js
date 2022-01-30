@@ -7,7 +7,7 @@ const config = {
 		prerender: {
 			crawl: true,
 			enabled: true,
-			entries: ["*", "/", "/api/all_pages.json", "/api/search_index.json"],
+			entries: ["*", "/api/search_index.json"],
 			onError: 'fail',
 			createIndexFiles: false,
 		},

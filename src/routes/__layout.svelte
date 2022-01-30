@@ -1,6 +1,6 @@
 <script context="module">
 	export async function load({ fetch }) {
-		const content = await fetch(`/sidebar.json`).then((r) => r.json());
+		const content = await fetch(`/api/sidebar.json`).then((r) => r.json());
 		return {
 			props: { sidebar: content }
 		};

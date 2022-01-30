@@ -18,7 +18,7 @@
     } else if (!query) {
       return [];
     }
-		return fuse.search(query, {limit: 5});
+		return fuse.search(query, {limit: 10});
 	}
 </script>
 
@@ -65,6 +65,8 @@
 		width: 100%;
 		margin: 0.5rem 0px;
 		border-radius: 0.5rem;
+    max-height: 500px;
+    overflow-y: scroll;
 	}
 
 	.results ol {

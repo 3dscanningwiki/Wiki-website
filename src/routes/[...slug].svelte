@@ -6,7 +6,7 @@
 			slug = slug.substr(0, slug.length-1);
 		}
 
-		const res = await fetch(`/${slug}.json`);
+		const res = await fetch(`/api/${slug}.json`);
 		const content = await res.json().catch((err) => console.log(err));
 		
 		if (!content.html) {
