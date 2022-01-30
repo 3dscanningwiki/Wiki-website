@@ -6,7 +6,10 @@ node_modules
 .env
 .env.*
 !.env.example
+
+# folder and file in case of symlink
 content/
+content
 
 
 static/

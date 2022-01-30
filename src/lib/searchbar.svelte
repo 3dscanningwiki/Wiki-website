@@ -50,17 +50,17 @@
 	}
 	.searchbar {
 		height: 2rem;
-		background-color: var(--header-light);
+		background-color: var(--accent-2-6);
 		border: 0px;
 		border-radius: 0.5rem;
 		width: 100%;
 		display: block;
-		color: var(--header-text);
+		color: var(--accent-2-text);
 		padding: 0px 1rem;
 	}
 	.results {
 		position: absolute;
-		background-color: var(--sidebar);
+		background-color: var(--accent-1-6);
 		color: var(--text);
 		width: 100%;
 		margin: 0.5rem 0px;
@@ -76,11 +76,19 @@
 	}
 
 	.results li {
-		background-color: var(--sidebar-light);
+		background-color: white;
 		margin: 0.5rem 0px;
 		padding: 0.1rem 0.5rem;
 		border-radius: 0.25rem;
 	}
+
+	.results li:hover {
+		background-color: var(--accent-1-9);
+		margin: 0.5rem 0px;
+		padding: 0.1rem 0.5rem;
+		border-radius: 0.25rem;
+	}
+
   .result a {
     display: block;
     text-decoration: none;

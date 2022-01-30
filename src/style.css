@@ -9,13 +9,19 @@ html, body {
   min-height: 100%;
 
   --text: #000000;
-  --sidebar: #1976d2;
-  --sidebar-hover: #2b81d5;
-  --sidebar-light: #94C9FF;
-  --sidebar-text: #ffffff;
-  --header: #000000;
-  --header-light: #131313;
-  --header-text: #ffffff;
+
+  /* https://coolors.co/0f4780-176bbf-1976d2-2485e5-5aa3eb-c8e0f9-ecf5fd */
+  --accent-1-5: #1976D2;
+  --accent-1-6: #2485E5;
+  --accent-1-7: #5AA3EB;
+  --accent-1-8: #C8E0F9;
+  --accent-1-9: #ECF5FD;
+  --accent-1-text: #ffffff;
+  
+  --accent-2-5: #000000;
+  --accent-2-6: #131313;
+  --accent-2-text: #ffffff;
+  
   --header-height: 64px;
   --sidebar-width: 200px;
 }
@@ -37,8 +43,8 @@ html, body {
   flex-direction: column;
   min-width: var(--sidebar-width);
   padding: 1.25rem 0.5rem;
-  background-color: var(--sidebar);
-  color: var(--sidebar-text);
+  background-color: var(--accent-1-5);
+  color: var(--accent-1-text);
 }
 
 .sidebar ul {
@@ -59,11 +65,11 @@ html, body {
   text-decoration: none;
 }
 .sidebar a:hover {
-  background-color: var(--sidebar-hover);
+  background-color: var(--accent-1-6);
 }
 
 .sidebar hr {
-  border-top: 1px solid var(--sidebar-light);
+  border-top: 1px solid var(--accent-1-7);
   width: 75%;
 }
 .container {
@@ -76,12 +82,12 @@ html, body {
   align-items: center;
   justify-content: space-between;
   padding: 0rem 1rem;
-  background-color: var(--header);
-  color: var(--header-text);
+  background-color: var(--accent-2-5);
+  color: var(--accent-2-text);
 }
 .header .title {
   font-size: 1.25rem;
-  color: var(--header-text);
+  color: var(--accent-2-text);
   text-decoration: none;
 }
 .header .burger {
@@ -92,7 +98,7 @@ html, body {
 }
 
 .header .burger:hover {
-  background-color: var(--header-light);
+  background-color: var(--accent-2-6);
 }
 
 @media screen and (max-width: 800px) {
@@ -123,7 +129,7 @@ html, body {
 .content .note {
   display: inline-block;
   padding: 1rem;
-  background-color: var(--sidebar-light);
+  background-color: var(--accent-1-7);
   border-radius: 0.25rem;
 }
 
@@ -131,6 +137,14 @@ html, body {
   font-family: 'Linux Libertine','Georgia','Times',serif;
   font-weight: normal;
   border-bottom: 1px solid #bac9db;
+}
+
+.content blockquote {
+  background-color: var(--accent-1-9);
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+  border-left: 5px solid var(--accent-1-6);
+  border-right: 5px solid var(--accent-1-6);
 }
 
 
