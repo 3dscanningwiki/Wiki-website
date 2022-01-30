@@ -30,7 +30,7 @@ export async function process(fileName) {
 
 		const html = md.render(str);
 		if (!metadata || metadata.published !== false) {
-			return { html, slug: fileName.slice(0, -3), frontmatter: metadata, status: 200 };
+			return { frontmatter: metadata, slug: fileName.slice(0, -3), html };
 		}
 	} catch (err) {
 		console.log('404 Error loading md file', fileName);
@@ -38,35 +38,44 @@ export async function process(fileName) {
 	return undefined;
 }
 
-
+let processAllCache = null;
 export async function processAll() {
-	const files = (await getFiles(filePath)).map(f => f.substr(filePath.length))
+	if (processAllCache) {
+		return processAllCache;
+	}
+	
+	const files = (await getFiles(filePath)).map((f) => f.substr(filePath.length));
 
-	const data = (await Promise.all(files.map(async f => {
-		const md = MarkdownIt();
-		let metadata;
-		md.use(FrontMatter, (fm) => {
-			metadata = yaml.load(fm);
-		});
-		const str = await fs.readFile(filePath + f, 'utf8');
-		md.render(str);
-		
-		if (metadata?.published === false) {
-			return undefined;
-		}
+	const data = (
+		await Promise.all(
+			files.map(async (f) => {
+				const md = MarkdownIt();
+				let metadata;
+				md.use(FrontMatter, (fm) => {
+					metadata = yaml.load(fm);
+				});
+				const str = await fs.readFile(filePath + f, 'utf8');
+				md.render(str);
 
-		return {
-			text: str,
-			...metadata,
-			slug: f.substring(0, f.length -3 ) + "/",
-		}
-	}))).filter(d => d);
+				if (metadata?.published === false) {
+					return undefined;
+				}
 
+				return {
+					...metadata,
+					slug: f.substring(0, f.length - 3) + '/',
+					text: str
+				};
+			})
+		)
+	).filter((d) => d);
+
+	processAllCache = data;
 	return data;
 }
 
 function replaceLink(link, env) {
-	link = link.trim()
+	link = link.trim();
 	if (!link.startsWith('http') && link.endsWith('.md')) {
 		return link.substr(0, link.length - 3);
 	}

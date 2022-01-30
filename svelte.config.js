@@ -3,11 +3,13 @@ import adapter from '@sveltejs/adapter-static';
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
-		adapter: adapter(),
+		adapter: adapter({
+			
+		}),
 		prerender: {
 			crawl: true,
 			enabled: true,
-			entries: ["*", "/api/search_index.json"],
+			entries: ["*", "/api/search_index.json", "/404"],
 			onError: 'fail',
 			createIndexFiles: false,
 		},
