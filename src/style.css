@@ -8,6 +8,7 @@ html, body {
   height: 100%;
   min-height: 100%;
 
+  --text: #000000;
   --sidebar: #1976d2;
   --sidebar-hover: #2b81d5;
   --sidebar-light: #94C9FF;
@@ -69,9 +70,11 @@ html, body {
   flex-grow: 3;
 }
 .header {
-  height: var(--header-height);
+  min-height: var(--header-height);
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
   padding: 0rem 1rem;
   background-color: var(--header);
   color: var(--header-text);
@@ -103,6 +106,10 @@ html, body {
 
   .sidebar.active {
     display: flex;
+  }
+
+  .header .title {
+    display: none;
   }
 
 }

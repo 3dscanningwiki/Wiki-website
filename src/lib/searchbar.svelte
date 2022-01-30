@@ -1,0 +1,100 @@
+<script>
+	import Fuse from 'fuse.js';
+	import { options } from './searchOptions';
+
+	let query = '';
+	let fuse;
+	let results = [];
+	$: search(query).then((r) => (results = r));
+
+	async function search(query) {
+		if (query && !fuse) {
+			const [data, index] = await Promise.all([
+				fetch('/api/all_pages.json').then((r) => r.json()),
+				fetch('/api/search_index.json').then((r) => r.json()).then(t => Fuse.parseIndex(t))
+			]);
+			fuse = new Fuse(data, options, index);
+      console.log(data);
+    } else if (!query) {
+      return [];
+    }
+		return fuse.search(query, {limit: 5});
+	}
+</script>
+
+<div class="search-wrap">
+	<input bind:value={query} class="searchbar" type="text" placeholder="Search" />
+	{#if results.length}
+  <div class="results">
+		<ol>
+			{#each results as result}
+				<li class="result">
+          <a href={`/${result.item.slug}`}>
+            <p class="res-title">{result.item.title ?? result.item.slug}</p>
+            <p class="res-desc">{result.item.description ?? ''}</p>
+          </a>
+        </li>
+			{/each}
+		</ol>
+	</div>
+  {/if}
+</div>
+
+<style>
+	.search-wrap {
+		max-width: 75%;
+    min-width: 280px;
+		flex-grow: 1;
+		position: relative;
+		overflow: visible;
+	}
+	.searchbar {
+		height: 2rem;
+		background-color: var(--header-light);
+		border: 0px;
+		border-radius: 0.5rem;
+		width: 100%;
+		display: block;
+		color: var(--header-text);
+		padding: 0px 1rem;
+	}
+	.results {
+		position: absolute;
+		background-color: var(--sidebar);
+		color: var(--text);
+		width: 100%;
+		margin: 0.5rem 0px;
+		border-radius: 0.5rem;
+	}
+
+	.results ol {
+		list-style: none;
+		padding: 0.25rem;
+		margin: 0.5rem;
+	}
+
+	.results li {
+		background-color: var(--sidebar-light);
+		margin: 0.5rem 0px;
+		padding: 0.1rem 0.5rem;
+		border-radius: 0.25rem;
+	}
+  .result a {
+    display: block;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .result p {
+    margin: 0.75rem 0rem;
+  }
+  .result .res-title {
+    font-size: 1.2rem;
+  }
+  @media screen and (max-width: 800px) {
+	  .search-wrap {
+		flex-grow: 1;
+		  position: relative;
+		  overflow: visible;
+	  }
+  }
+</style>

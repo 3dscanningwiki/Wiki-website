@@ -42,7 +42,7 @@ export async function process(fileName) {
 export async function processAll() {
 	const files = (await getFiles(filePath)).map(f => f.substr(filePath.length))
 
-	const data = Promise.all(files.map(async f => {
+	const data = (await Promise.all(files.map(async f => {
 		const md = MarkdownIt();
 		let metadata;
 		md.use(FrontMatter, (fm) => {
@@ -51,12 +51,16 @@ export async function processAll() {
 		const str = await fs.readFile(filePath + f, 'utf8');
 		md.render(str);
 		
+		if (metadata?.published === false) {
+			return undefined;
+		}
+
 		return {
 			text: str,
 			...metadata,
 			slug: f.substring(0, f.length -3 ) + "/",
 		}
-	}));
+	}))).filter(d => d);
 
 	return data;
 }

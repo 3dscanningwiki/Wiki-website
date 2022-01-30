@@ -1,4 +1,6 @@
 <script>
+import Searchbar from "./searchbar.svelte";
+
   export let sidebarActive = false;  
 
   function toggleSidebar() {
@@ -18,4 +20,5 @@
     </svg>
   </span>  
   <a class="title" href="/">3D Scanning Wiki</a>
+  <Searchbar />
 </nav>
