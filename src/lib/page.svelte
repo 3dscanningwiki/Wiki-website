@@ -22,7 +22,7 @@
 			>
 		</p>
 	{:else}
-		{#if frontmatter.wip}
+		{#if frontmatter?.wip}
 			<div class="note">
 				This page is still a work in progress, please help <a href={editLink}>expand it</a>.
 			</div>
