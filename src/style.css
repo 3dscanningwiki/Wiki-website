@@ -127,6 +127,13 @@ html, body {
   border-radius: 0.25rem;
 }
 
+.content h1, .content h2 {
+  font-family: 'Linux Libertine','Georgia','Times',serif;
+  font-weight: normal;
+  border-bottom: 1px solid #bac9db;
+}
+
+
 .content img {
   display: block;
   max-width: 50%;
