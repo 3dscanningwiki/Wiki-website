@@ -8,11 +8,15 @@ const config = {
 			crawl: true,
 			enabled: true,
 			entries: ['*'],
-			onError: 'fail'
+			onError: 'fail',
+			createIndexFiles: false,
 		},
 		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#svelte',
-		trailingSlash: "always",
+		trailingSlash: "never",
+		browser: {
+			router: false,
+		},
 	}
 };
 

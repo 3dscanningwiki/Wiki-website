@@ -10,7 +10,7 @@ html, body {
 
   --sidebar: #1976d2;
   --sidebar-hover: #2b81d5;
-  --sidebar-light: #3f56bd;
+  --sidebar-light: #94C9FF;
   --sidebar-text: #ffffff;
   --header: #000000;
   --header-light: #131313;
@@ -113,6 +113,13 @@ html, body {
   margin: 1rem;
 }
 
+.content .note {
+  display: inline-block;
+  padding: 1rem;
+  background-color: var(--sidebar-light);
+  border-radius: 0.25rem;
+}
+
 .content img {
   display: block;
   max-width: 50%;
@@ -122,21 +129,35 @@ html, body {
   max-height: max(25vh, 150px);
 }
 
-.footnote-item p {
+.content .footnote-item p {
   margin: 0px;
   display: inline;
 }
 
-.footnotes-list {
+.content .footnotes-list {
   counter-reset: list;
   padding: 0rem 0rem;
 }
 
-.footnote-item {
+.content .footnote-item {
   list-style: none;
 }
-.footnote-item:before {
+.content .footnote-item:before {
   content: "[" counter(list) "]";
   margin-right: 0.5rem;
   counter-increment: list;
+}
+
+.content .footnote-backref {
+  text-decoration: none;
+}
+
+.content .edit-link {
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: gray;
+}
+
+.content a[href^="http"]:after {
+     content: " " url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAIpJREFUeNqEkIEJwCAMBGPpEs7hHK6hY+gauoZr6Bo6RtqEWkxb6EMQnuM/USEirIoxSmOKwDkhBEwp4VPkb4801Xun9xW4e+9FldYarLUvkBPPOp4JGWOgtSaSt6VWQKUU9nPOEiSIgAmNMdadFTjn7utqrXwh6fLvH9nXhamW5ksMnpfDnw4BBgBfunO056MmqAAAAABJRU5ErkJggg==);
 }
