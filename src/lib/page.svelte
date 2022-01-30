@@ -8,7 +8,10 @@
 </script>
 
 <svelte:head>
-	<title>3D Scanning Wiki - {frontmatter?.title ?? ''}</title>
+	<title>{frontmatter?.title ?? ''} - 3D Scanning Wiki</title>
+	<meta property="og:title" content={`${frontmatter?.title ?? ''} - 3D Scanning Wiki`}>
+	<meta property="og:description" content={frontmatter?.description ?? frontmatter?.title ?? slug}>
+	<meta property="og:url" content={`https://3dscanning.wiki/${slug}`}>
 </svelte:head>
 
 <main class="content">
