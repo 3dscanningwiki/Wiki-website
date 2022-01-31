@@ -1,20 +1,20 @@
 <script context="module">
 	export async function load({ params, fetch }) {
 		let slug = params.slug;
-		
-		if (slug.endsWith("/")) {
-			slug = slug.substr(0, slug.length-1);
+
+		if (slug.endsWith('/')) {
+			slug = slug.substr(0, slug.length - 1);
 		}
 
 		const res = await fetch(`/api/${slug}.json`);
 		const content = await res.json().catch((err) => console.log(err));
-		
+
 		if (!content.html) {
 			return {
-				status: 404,
-			}
+				status: 404
+			};
 		}
-		
+
 		return {
 			props: { content, slug }
 		};
@@ -22,9 +22,9 @@
 </script>
 
 <script>
-  import Page from "$lib/page.svelte";
-  export let content;
-  export let slug;
+	import Page from '$lib/page.svelte';
+	export let content;
+	export let slug;
 </script>
 
-<Page slug={slug} html={content.html} frontmatter={content.frontmatter ?? {}} />
+<Page {slug} html={content.html} frontmatter={content.frontmatter ?? {}} />

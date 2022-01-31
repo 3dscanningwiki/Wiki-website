@@ -1,24 +1,23 @@
 <script>
-import Searchbar from "./searchbar.svelte";
+	import Searchbar from './searchbar.svelte';
 
-  export let sidebarActive = false;  
+	export let sidebarActive = false;
 
-  function toggleSidebar() {
-    sidebarActive = !sidebarActive;
-  }
+	function toggleSidebar() {
+		sidebarActive = !sidebarActive;
+	}
 </script>
 
-
 <nav class="header">
-  <span class="burger" on:click={toggleSidebar}>
-    <svg viewBox="0 0 100 60" width="25" height="25">
-      <g style="fill:white">
-        <rect width="100" height="11"></rect>
-        <rect y="30" width="100" height="11"></rect>
-        <rect y="60" width="100" height="11"></rect>
-      </g>
-    </svg>
-  </span>  
-  <a class="title" href="/">3D Scanning Wiki</a>
-  <Searchbar />
+	<span class="burger" on:click={toggleSidebar}>
+		<svg viewBox="0 0 100 60" width="25" height="25">
+			<g style="fill:white">
+				<rect width="100" height="11" />
+				<rect y="30" width="100" height="11" />
+				<rect y="60" width="100" height="11" />
+			</g>
+		</svg>
+	</span>
+	<a class="title" href="/">3D Scanning Wiki</a>
+	<Searchbar />
 </nav>

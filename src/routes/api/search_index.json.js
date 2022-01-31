@@ -1,5 +1,5 @@
 import { processAll } from '$lib/markdown';
-import {options} from "$lib/searchOptions";
+import { options } from '$lib/searchOptions';
 import Fuse from 'fuse.js';
 
 export async function get() {

@@ -4,14 +4,18 @@
 	export let slug;
 
 	let editLink;
-	$: editLink = `https://github.com/3dscanningwiki/3dscanningwiki.github.io/blob/main/${slug}.md`;
+	$: editLink = `https://github.dev/3dscanningwiki/3dscanningwiki.github.io/blob/main/${slug}.md`;
+	$: githubLink = editLink.replace('github.dev', 'github.com');
 </script>
 
 <svelte:head>
 	<title>{frontmatter?.title ?? ''} - 3D Scanning Wiki</title>
-	<meta property="og:title" content={`${frontmatter?.title ?? ''} - 3D Scanning Wiki`}>
-	<meta property="og:description" content={frontmatter?.description ?? frontmatter?.title ?? slug}>
-	<meta property="og:url" content={`https://3dscanning.wiki/${slug}`}>
+	<meta property="og:title" content={`${frontmatter?.title ?? ''} - 3D Scanning Wiki`} />
+	<meta
+		property="og:description"
+		content={frontmatter?.description ?? frontmatter?.title ?? slug}
+	/>
+	<meta property="og:url" content={`https://3dscanning.wiki/${slug}`} />
 </svelte:head>
 
 <main class="content">
@@ -23,4 +27,5 @@
 	{@html html}
 	<hr />
 	<a class="edit-link" href={editLink} target="_blank">Edit this page</a>
+	<a class="edit-link" href={githubLink} target="_blank">Visit this page on GitHub</a>
 </main>

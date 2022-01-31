@@ -1,7 +1,6 @@
 <script>
-  export let sidebarActive;
+	export let sidebarActive;
 </script>
-
 
 <nav class="sidebar" class:active={sidebarActive}>
 	<slot />

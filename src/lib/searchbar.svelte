@@ -11,39 +11,41 @@
 		if (query && !fuse) {
 			const [data, index] = await Promise.all([
 				fetch('/api/all_pages.json').then((r) => r.json()),
-				fetch('/api/search_index.json').then((r) => r.json()).then(t => Fuse.parseIndex(t))
+				fetch('/api/search_index.json')
+					.then((r) => r.json())
+					.then((t) => Fuse.parseIndex(t))
 			]);
 			fuse = new Fuse(data, options, index);
-      console.log(data);
-    } else if (!query) {
-      return [];
-    }
-		return fuse.search(query, {limit: 10});
+			console.log(data);
+		} else if (!query) {
+			return [];
+		}
+		return fuse.search(query, { limit: 10 });
 	}
 </script>
 
 <div class="search-wrap">
 	<input bind:value={query} class="searchbar" type="text" placeholder="Search" />
 	{#if results.length}
-  <div class="results">
-		<ol>
-			{#each results as result}
-				<li class="result">
-          <a href={`/${result.item.slug}`}>
-            <p class="res-title">{result.item.title ?? result.item.slug}</p>
-            <p class="res-desc">{result.item.description ?? ''}</p>
-          </a>
-        </li>
-			{/each}
-		</ol>
-	</div>
-  {/if}
+		<div class="results">
+			<ol>
+				{#each results as result}
+					<li class="result">
+						<a href={`/${result.item.slug}`}>
+							<p class="res-title">{result.item.title ?? result.item.slug}</p>
+							<p class="res-desc">{result.item.description ?? ''}</p>
+						</a>
+					</li>
+				{/each}
+			</ol>
+		</div>
+	{/if}
 </div>
 
 <style>
 	.search-wrap {
 		max-width: 75%;
-    min-width: 280px;
+		min-width: 280px;
 		flex-grow: 1;
 		position: relative;
 		overflow: visible;
@@ -65,8 +67,8 @@
 		width: 100%;
 		margin: 0.5rem 0px;
 		border-radius: 0.5rem;
-    max-height: 500px;
-    overflow-y: scroll;
+		max-height: 500px;
+		overflow-y: scroll;
 	}
 
 	.results ol {
@@ -89,22 +91,22 @@
 		border-radius: 0.25rem;
 	}
 
-  .result a {
-    display: block;
-    text-decoration: none;
-    color: var(--text);
-  }
-  .result p {
-    margin: 0.75rem 0rem;
-  }
-  .result .res-title {
-    font-size: 1.2rem;
-  }
-  @media screen and (max-width: 800px) {
-	  .search-wrap {
-		flex-grow: 1;
-		  position: relative;
-		  overflow: visible;
-	  }
-  }
+	.result a {
+		display: block;
+		text-decoration: none;
+		color: var(--text);
+	}
+	.result p {
+		margin: 0.75rem 0rem;
+	}
+	.result .res-title {
+		font-size: 1.2rem;
+	}
+	@media screen and (max-width: 800px) {
+		.search-wrap {
+			flex-grow: 1;
+			position: relative;
+			overflow: visible;
+		}
+	}
 </style>

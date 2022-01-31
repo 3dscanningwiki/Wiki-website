@@ -43,7 +43,7 @@ export async function processAll() {
 	if (processAllCache) {
 		return processAllCache;
 	}
-	
+
 	const files = (await getFiles(filePath)).map((f) => f.substr(filePath.length));
 
 	const data = (
