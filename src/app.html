@@ -8,6 +8,11 @@
 		<meta name="twitter:card" content="summary" />
 		<meta property="og:site_name" content="3D Scanning Wiki" />
 		<meta property="og:type" content="website" />
+		<script>
+			if (location.protocol !== 'https:' && !location.port) { 
+				location.replace(`https:${location.href.substring(location.protocol.length)}`);
+			}
+		</script>
 		%svelte.head%
 	</head>
 	<body>
