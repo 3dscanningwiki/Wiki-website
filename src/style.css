@@ -156,6 +156,11 @@ body {
 	max-height: max(25vh, 150px);
 }
 
+.content table {
+	border-spacing: 3rem 0px;
+	border-collapse: separate;
+}
+
 .content .footnote-item p {
 	margin: 0px;
 	display: inline;
