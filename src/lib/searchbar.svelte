@@ -1,27 +1,10 @@
 <script>
-	import Fuse from 'fuse.js';
-	import { options } from './searchOptions';
+	import { search } from './search';
+
 
 	let query = '';
-	let fuse;
 	let results = [];
 	$: search(query).then((r) => (results = r));
-
-	async function search(query) {
-		if (query && !fuse) {
-			const [data, index] = await Promise.all([
-				fetch('/api/all_pages.json').then((r) => r.json()),
-				fetch('/api/search_index.json')
-					.then((r) => r.json())
-					.then((t) => Fuse.parseIndex(t))
-			]);
-			fuse = new Fuse(data, options, index);
-			console.log(data);
-		} else if (!query) {
-			return [];
-		}
-		return fuse.search(query, { limit: 10 });
-	}
 </script>
 
 <div class="search-wrap">
@@ -31,9 +14,9 @@
 			<ol>
 				{#each results as result}
 					<li class="result">
-						<a href={`/${result.item.slug}`}>
-							<p class="res-title">{result.item.title ?? result.item.slug}</p>
-							<p class="res-desc">{result.item.description ?? ''}</p>
+						<a href={`/${result.slug}`}>
+							<p class="res-title">{result.title ?? result.slug}</p>
+							<p class="res-desc">{result.description ?? ''}</p>
 						</a>
 					</li>
 				{/each}

@@ -2,6 +2,7 @@ import MarkdownIt from 'markdown-it';
 import FrontMatter from 'markdown-it-front-matter';
 import ReplaceLink from 'markdown-it-replace-link';
 import InlineComment from 'markdown-it-inline-comments';
+import PlainText from 'markdown-it-plain-text';
 import Footnote from 'markdown-it-footnote';
 import fs from 'fs-extra';
 import yaml from 'js-yaml';
@@ -50,6 +51,11 @@ export async function processAll() {
 		await Promise.all(
 			files.map(async (f) => {
 				const md = MarkdownIt();
+
+				md.use(PlainText);
+				md.use(InlineComment);
+				md.use(Footnote);
+
 				let metadata;
 				md.use(FrontMatter, (fm) => {
 					metadata = yaml.load(fm);
@@ -64,11 +70,13 @@ export async function processAll() {
 				return {
 					...metadata,
 					slug: f.substring(0, f.length - 3),
-					text: str
+					text: md.plainText
 				};
 			})
 		)
-	).filter((d) => d);
+	)
+		.filter((d) => d)
+		.map((v, i) => ({ id: i, ...v }));
 
 	processAllCache = data;
 	return data;
