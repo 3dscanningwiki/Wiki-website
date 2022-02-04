@@ -52,7 +52,6 @@ import { onMount } from "svelte";
 	</div>
 </div>
 {/if}
-{sImage}
 
 
 <style>
