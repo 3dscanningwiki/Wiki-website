@@ -152,6 +152,7 @@ body {
 	max-width: 75%;
 	margin: 2rem;
 	max-height: max(25vh, 150px);
+	cursor: pointer;
 }
 
 .content table {
