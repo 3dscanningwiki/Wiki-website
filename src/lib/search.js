@@ -1,4 +1,5 @@
-import { Document } from 'flexsearch';
+import pkg from 'flexsearch';
+const { Document } = pkg;
 
 export const options = {
 	preset: 'match',
@@ -12,7 +13,6 @@ export const options = {
 };
 
 export async function makeIndex(entries) {
- 
 	const document = new Document(options);
 
 	entries.forEach((f) => document.add(f));
@@ -30,9 +30,7 @@ export async function makeIndex(entries) {
 	});
 
 	return index;
-
 }
-
 
 let document, pages;
 export async function search(query) {
