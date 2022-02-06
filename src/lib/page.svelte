@@ -62,13 +62,19 @@ import { onMount } from "svelte";
 		left: 0;
 		right: 0;
 		bottom: 0;
-	  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+	  background-color: rgba(0,0,0,0.5);
 		cursor: pointer;
 		justify-content: center;
 		align-items: center;
 	}
 	.popup {
 		background-color: white;
+		max-width: 100vh;
+		max-height: 100vh;
+	}
+	.popup img {
+		width: 100%;
+		height: 100%;
 	}
 	.popup p {
 		width: 100%;
