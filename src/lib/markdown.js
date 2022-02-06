@@ -7,12 +7,13 @@ import Footnote from 'markdown-it-footnote';
 import fs from 'fs-extra';
 import yaml from 'js-yaml';
 import path from 'path';
+import { dev } from '$app/env';
 
 const filePath = 'content/';
 
 let CACHE = null;
 async function loadAll() {
-	if (CACHE) {
+	if (CACHE && !dev) {
 		return CACHE;
 	}
 
@@ -78,8 +79,8 @@ export async function processAll() {
 	}
 
 	const data = Object.values(await loadAll()).map((v) => {
-		const { frontmatter, text, slug } = v;
-		return { ...frontmatter, slug, text };
+		const { metadata, id, text, slug } = v;
+		return { ...metadata, id, slug, text };
 	});
 
 	return data;
