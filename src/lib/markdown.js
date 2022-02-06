@@ -10,48 +10,23 @@ import path from 'path';
 
 const filePath = 'content/';
 
-export async function process(fileName) {
-	try {
-		const str = await fs.readFile(filePath + fileName, 'utf8');
-
-		const md = new MarkdownIt({
-			replaceLink,
-			breaks: false,
-			linkify: true
-		});
-
-		let metadata;
-		md.use(FrontMatter, (fm) => {
-			metadata = yaml.load(fm);
-		});
-
-		md.use(ReplaceLink);
-		md.use(InlineComment);
-		md.use(Footnote);
-
-		const html = md.render(str);
-		if (!metadata || metadata.published !== false) {
-			return { frontmatter: metadata, slug: fileName.slice(0, -3), html };
-		}
-	} catch (err) {
-		console.log('404 Error loading md file', fileName);
-	}
-	return undefined;
-}
-
-let processAllCache = null;
-export async function processAll() {
-	if (processAllCache) {
-		return processAllCache;
+let CACHE = null;
+async function loadAll() {
+	if (CACHE) {
+		return CACHE;
 	}
 
 	const files = (await getFiles(filePath)).map((f) => f.substr(filePath.length));
-
 	const data = (
 		await Promise.all(
 			files.map(async (f) => {
-				const md = MarkdownIt();
+				const md = new MarkdownIt({
+					replaceLink,
+					breaks: false,
+					linkify: true
+				});
 
+				md.use(ReplaceLink);
 				md.use(PlainText);
 				md.use(InlineComment);
 				md.use(Footnote);
@@ -60,25 +35,53 @@ export async function processAll() {
 				md.use(FrontMatter, (fm) => {
 					metadata = yaml.load(fm);
 				});
+
+
 				const str = await fs.readFile(filePath + f, 'utf8');
-				md.render(str);
+				const html = md.render(str);
 
 				if (metadata?.published === false) {
 					return undefined;
 				}
 
 				return {
-					...metadata,
+					metadata,
 					slug: f.substring(0, f.length - 3),
-					text: md.plainText
+					text: md.plainText,
+					html
 				};
 			})
 		)
 	)
-		.filter((d) => d)
-		.map((v, i) => ({ id: i, ...v }));
+		.filter((d) => d) // remove empty
+		.map((v, i) => ({ id: i, ...v })) // add id
+		.reduce((p, c) => { // add aliases
+			let aliases = [c.slug].concat(c.metadata?.alias).filter(a => a);
+			const obj = aliases.reduce((pa, ca) => ({...pa, [ca]: c}), {});
+			return { ...p, ...obj };
+		}, {});
+	CACHE = data;
 
-	processAllCache = data;
+	return data;
+}
+
+export async function process(fileName) {
+	const slug = fileName.slice(0, -3);
+
+	return (await loadAll())[slug];
+}
+
+let processAllCache = null;
+export async function processAll() {
+	if (processAllCache) {
+		return processAllCache;
+	}
+
+	const data = Object.values(await loadAll()).map((v) => {
+		const { frontmatter, text, slug } = v;
+		return { ...frontmatter, slug, text };
+	});
+
 	return data;
 }
 
