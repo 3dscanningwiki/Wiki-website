@@ -27,4 +27,4 @@
 	export let slug;
 </script>
 
-<Page {slug} html={content.html} frontmatter={content.frontmatter ?? {}} />
+<Page {slug} html={content.html} frontmatter={content.metadata ?? {}} />
