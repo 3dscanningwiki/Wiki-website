@@ -1,6 +1,5 @@
 <script>
-import { onMount } from "svelte";
-
+	import { onMount } from 'svelte';
 
 	export let html;
 	export let frontmatter;
@@ -11,9 +10,9 @@ import { onMount } from "svelte";
 	let sImage = null;
 
 	onMount(() => {
-		const imgs = mainElement.querySelectorAll("img");
-		imgs.forEach(i => i.addEventListener("click", (e) => sImage = e.target))
-	})
+		const imgs = mainElement.querySelectorAll('img');
+		imgs.forEach((i) => i.addEventListener('click', (e) => (sImage = e.target)));
+	});
 
 	let editLink;
 	$: editLink = `https://github.dev/3dscanningwiki/3dscanningwiki.github.io/blob/main/${slug}.md`;
@@ -43,26 +42,25 @@ import { onMount } from "svelte";
 </main>
 
 {#if sImage}
-<div class="overlay" on:click={() => sImage = null}>
-	<div class="popup">
-		<img src={sImage.src} alt={sImage.alt} title={sImage.title ?? sImage.alt} />
-		<p>
-			{sImage.title}{sImage.alt}
-		</p>
+	<div class="overlay" on:click={() => (sImage = null)}>
+		<div class="popup">
+			<img src={sImage.src} alt={sImage.alt} title={sImage.title ?? sImage.alt} />
+			<p>
+				{sImage.title}{sImage.alt}
+			</p>
+		</div>
 	</div>
-</div>
 {/if}
-
 
 <style>
 	.overlay {
-		position: fixed; 
+		position: fixed;
 		display: flex;
 		top: 0;
 		left: 0;
 		right: 0;
 		bottom: 0;
-	  background-color: rgba(0,0,0,0.5);
+		background-color: rgba(0, 0, 0, 0.5);
 		cursor: pointer;
 		justify-content: center;
 		align-items: center;

@@ -1,7 +1,6 @@
 <script>
 	import { search } from './search';
 
-
 	let query = '';
 	let results = [];
 	$: search(query).then((r) => (results = r));

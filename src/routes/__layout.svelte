@@ -10,7 +10,7 @@
 <script>
 	import Header from '$lib/header.svelte';
 	import Sidebar from '$lib/sidebar.svelte';
-	import 'markdown-it-texmath/css/texmath.css'
+	import 'markdown-it-texmath/css/texmath.css';
 	import 'katex/dist/katex.css';
 	import '../style.css';
 

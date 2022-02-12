@@ -35,7 +35,7 @@ async function loadAll() {
 				md.use(Footnote);
 				md.use(TexMath, {
 					engine: Katex,
-					delimiters: 'gitlab',
+					delimiters: 'gitlab'
 				});
 
 				let metadata;
