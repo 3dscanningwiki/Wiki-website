@@ -4,6 +4,8 @@ import ReplaceLink from 'markdown-it-replace-link';
 import InlineComment from 'markdown-it-inline-comments';
 import PlainText from 'markdown-it-plain-text';
 import Footnote from 'markdown-it-footnote';
+import TexMath from 'markdown-it-texmath';
+import Katex from 'katex';
 import fs from 'fs-extra';
 import yaml from 'js-yaml';
 import path from 'path';
@@ -31,12 +33,15 @@ async function loadAll() {
 				md.use(PlainText);
 				md.use(InlineComment);
 				md.use(Footnote);
+				md.use(TexMath, {
+					engine: Katex,
+					delimiters: 'gitlab',
+				});
 
 				let metadata;
 				md.use(FrontMatter, (fm) => {
 					metadata = yaml.load(fm);
 				});
-
 
 				const str = await fs.readFile(filePath + f, 'utf8');
 				const html = md.render(str);
@@ -56,9 +61,10 @@ async function loadAll() {
 	)
 		.filter((d) => d) // remove empty
 		.map((v, i) => ({ id: i, ...v })) // add id
-		.reduce((p, c) => { // add aliases
-			let aliases = [c.slug].concat(c.metadata?.alias).filter(a => a);
-			const obj = aliases.reduce((pa, ca) => ({...pa, [ca]: c}), {});
+		.reduce((p, c) => {
+			// add aliases
+			let aliases = [c.slug].concat(c.metadata?.alias).filter((a) => a);
+			const obj = aliases.reduce((pa, ca) => ({ ...pa, [ca]: c }), {});
 			return { ...p, ...obj };
 		}, {});
 	CACHE = data;
